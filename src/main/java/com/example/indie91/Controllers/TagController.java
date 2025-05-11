@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * TagController handles HTTP requests for managing tags. It communicates with the
@@ -48,7 +49,7 @@ public class TagController {
      * @return A ResponseEntity containing the tag or an error message.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<Tag>> getTagById(@PathVariable String id) {
+    public ResponseEntity<ApiResponse<Tag>> getTagById(@PathVariable UUID id) {
         try {
             Optional<Tag> tag = tagService.getTagById(id);
             return tag.map(value -> ResponseUtils.success(value, "Tag found"))
@@ -81,7 +82,7 @@ public class TagController {
      * @return A ResponseEntity containing a success message.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse<String>> deleteTag(@PathVariable String id) {
+    public ResponseEntity<ApiResponse<String>> deleteTag(@PathVariable UUID id) {
         try {
             tagService.deleteTag(id);
             return ResponseUtils.success("Tag deleted successfully", "Deleted");

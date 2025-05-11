@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/contentProduct")
@@ -30,7 +31,7 @@ public class ContentProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<ContentProduct>> getById(@PathVariable String id) {
+    public ResponseEntity<ApiResponse<ContentProduct>> getById(@PathVariable UUID id) {
         try {
             Optional<ContentProduct> result = service.getById(id);
             return result.map(value -> ResponseUtils.success(value, "Mapping found"))
@@ -51,7 +52,7 @@ public class ContentProductController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse<String>> delete(@PathVariable String id) {
+    public ResponseEntity<ApiResponse<String>> delete(@PathVariable UUID id) {
         try {
             service.delete(id);
             return ResponseUtils.success("Mapping deleted successfully", "Deleted");
@@ -61,7 +62,7 @@ public class ContentProductController {
     }
 
     @GetMapping("/byContent/{contentId}")
-    public ResponseEntity<ApiResponse<List<ContentProduct>>> getByContentId(@PathVariable String contentId) {
+    public ResponseEntity<ApiResponse<List<ContentProduct>>> getByContentId(@PathVariable UUID contentId) {
         try {
             List<ContentProduct> list = service.getByContentId(contentId);
             return ResponseUtils.success(list, "Fetched by content ID");
@@ -71,7 +72,7 @@ public class ContentProductController {
     }
 
     @GetMapping("/byProduct/{productId}")
-    public ResponseEntity<ApiResponse<List<ContentProduct>>> getByProductId(@PathVariable String productId) {
+    public ResponseEntity<ApiResponse<List<ContentProduct>>> getByProductId(@PathVariable UUID productId) {
         try {
             List<ContentProduct> list = service.getByProductId(productId);
             return ResponseUtils.success(list, "Fetched by product ID");

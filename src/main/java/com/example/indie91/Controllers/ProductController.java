@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * REST controller for managing Product entities.
@@ -36,7 +37,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<Product>> getProductById(@PathVariable String id) {
+    public ResponseEntity<ApiResponse<Product>> getProductById(@PathVariable UUID id) {
         try {
             Optional<Product> product = productService.getProductById(id);
             return product.map(value -> ResponseUtils.success(value, "Product found"))
@@ -57,7 +58,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse<String>> deleteProduct(@PathVariable String id) {
+    public ResponseEntity<ApiResponse<String>> deleteProduct(@PathVariable UUID id) {
         try {
             productService.deleteProduct(id);
             return ResponseUtils.success("Product deleted successfully", "Deleted");

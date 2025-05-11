@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * BrandService class contains the business logic for managing brands. It interacts
@@ -42,7 +43,7 @@ public class BrandService {
      * @param id The ID of the brand to retrieve.
      * @return An Optional containing the brand if found, else an empty Optional.
      */
-    public Optional<Brand> getBrandById(String id) {
+    public Optional<Brand> getBrandById(UUID id) {
         try {
             return brandRepository.findById(id);
         } catch (Exception e) {
@@ -71,7 +72,7 @@ public class BrandService {
      *
      * @param id The ID of the brand to delete.
      */
-    public void deleteBrand(String id) {
+    public void deleteBrand(UUID id) {
         try {
             brandRepository.deleteById(id);
         } catch (Exception e) {

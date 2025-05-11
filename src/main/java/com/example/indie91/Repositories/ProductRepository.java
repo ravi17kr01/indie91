@@ -1,13 +1,18 @@
 package com.example.indie91.Repositories;
 
 import com.example.indie91.Models.Product;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-/**
- * MongoDB repository for Product entity.
- */
-@Repository
-public interface ProductRepository extends MongoRepository<Product, String> {
-    // Additional query methods can be defined here if needed
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+public interface ProductRepository extends JpaRepository<Product, UUID> {
+
+    // Example: Find product by slug
+    Optional<Product> findBySlug(String slug);
+
+    // Example: Find all active products
+    List<Product> findByIsActiveTrue();
 }

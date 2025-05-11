@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/productMedia")
@@ -29,7 +30,7 @@ public class ProductMediaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<ProductMedia>> getById(@PathVariable String id) {
+    public ResponseEntity<ApiResponse<ProductMedia>> getById(@PathVariable Long id) {
         try {
             Optional<ProductMedia> result = service.getById(id);
             return result.map(r -> ResponseUtils.success(r, "Mapping found"))
@@ -49,7 +50,7 @@ public class ProductMediaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse<String>> delete(@PathVariable String id) {
+    public ResponseEntity<ApiResponse<String>> delete(@PathVariable Long id) {
         try {
             service.delete(id);
             return ResponseUtils.success("Mapping deleted successfully", "Deleted");
@@ -59,7 +60,7 @@ public class ProductMediaController {
     }
 
     @GetMapping("/byProduct/{productId}")
-    public ResponseEntity<ApiResponse<List<ProductMedia>>> getByProductId(@PathVariable String productId) {
+    public ResponseEntity<ApiResponse<List<ProductMedia>>> getByProductId(@PathVariable UUID productId) {
         try {
             return ResponseUtils.success(service.getByProductId(productId), "Fetched by product ID");
         } catch (Exception e) {
@@ -68,7 +69,7 @@ public class ProductMediaController {
     }
 
     @GetMapping("/byMedia/{mediaId}")
-    public ResponseEntity<ApiResponse<List<ProductMedia>>> getByMediaId(@PathVariable String mediaId) {
+    public ResponseEntity<ApiResponse<Optional<ProductMedia>>> getByMediaId(@PathVariable UUID mediaId) {
         try {
             return ResponseUtils.success(service.getByMediaId(mediaId), "Fetched by media ID");
         } catch (Exception e) {

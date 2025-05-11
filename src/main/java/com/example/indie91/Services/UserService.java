@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service // Marks this class as a service layer component, making it eligible for Spring's component scanning and dependency injection.
 public class UserService {
@@ -21,7 +22,7 @@ public class UserService {
     }
 
     // Searches the database for a user with the given ID and returns the result as an Optional.
-    public Optional<User> getUserById(String id) {
+    public Optional<User> getUserById(UUID id) {
         return userRepository.findById(id);
     }
 
@@ -31,7 +32,7 @@ public class UserService {
     }
 
     // Deletes the user with the given ID from the database.
-    public void deleteUser(String id) {
+    public void deleteUser(UUID id) {
         userRepository.deleteById(id);
     }
 }

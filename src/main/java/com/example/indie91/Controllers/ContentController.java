@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("api/content")
@@ -39,7 +40,7 @@ public class ContentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<Content>> getContentById(@PathVariable String id) {
+    public ResponseEntity<ApiResponse<Content>> getContentById(@PathVariable UUID id) {
         try {
             Content content = contentService.getContentById(id)
                     .orElse(null);
@@ -67,7 +68,7 @@ public class ContentController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse<Void>> deleteContent(@PathVariable String id) {
+    public ResponseEntity<ApiResponse<Void>> deleteContent(@PathVariable UUID id) {
         try {
             contentService.deleteContent(id);
             return ResponseUtils.success(null, "Content deleted successfully.");

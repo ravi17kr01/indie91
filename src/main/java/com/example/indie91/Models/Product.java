@@ -1,26 +1,36 @@
 package com.example.indie91.Models;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
-@Document(collection = "product")
+@Entity
+@Table(name = "product")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
 
     @Id
-    private String productId;
+    @GeneratedValue
+    @Column(name = "product_id", columnDefinition = "uuid", updatable = false, nullable = false)
+    private UUID productId;
 
     private String name;
+
     private String caption;
+
+    @Column(name = "is_active")
     private Boolean isActive;
-    private String brandId;
+
+    @Column(name = "brand_id", columnDefinition = "uuid")
+    private UUID brandId;
+
     private String slug;
+
     private BigDecimal price;
 }

@@ -1,20 +1,26 @@
 package com.example.indie91.Models;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "content_products")
+import java.util.UUID;
+
+@Entity
+@Table(name = "content_products")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ContentProduct {
 
     @Id
-    private String id;
+    @GeneratedValue
+    private UUID id;
 
-    private String contentId;
-    private String productId;
+    @Column(name = "content_id", nullable = false)
+    private UUID contentId;
+
+    @Column(name = "product_id", nullable = false)
+    private UUID productId;
 }

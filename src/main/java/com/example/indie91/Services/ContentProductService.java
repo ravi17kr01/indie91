@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ContentProductService {
@@ -27,7 +28,7 @@ public class ContentProductService {
         }
     }
 
-    public Optional<ContentProduct> getById(String id) {
+    public Optional<ContentProduct> getById(UUID id) {
         try {
             return contentProductRepository.findById(id);
         } catch (Exception e) {
@@ -45,7 +46,7 @@ public class ContentProductService {
         }
     }
 
-    public void delete(String id) {
+    public void delete(UUID id) {
         try {
             contentProductRepository.deleteById(id);
         } catch (Exception e) {
@@ -54,7 +55,7 @@ public class ContentProductService {
         }
     }
 
-    public List<ContentProduct> getByContentId(String contentId) {
+    public List<ContentProduct> getByContentId(UUID contentId) {
         try {
             return contentProductRepository.findByContentId(contentId);
         } catch (Exception e) {
@@ -63,7 +64,7 @@ public class ContentProductService {
         }
     }
 
-    public List<ContentProduct> getByProductId(String productId) {
+    public List<ContentProduct> getByProductId(UUID productId) {
         try {
             return contentProductRepository.findByProductId(productId);
         } catch (Exception e) {

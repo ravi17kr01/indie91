@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Handles business logic for products.
@@ -30,7 +31,7 @@ public class ProductService {
         }
     }
 
-    public Optional<Product> getProductById(String id) {
+    public Optional<Product> getProductById(UUID id) {
         try {
             return productRepository.findById(id);
         } catch (Exception e) {
@@ -48,7 +49,7 @@ public class ProductService {
         }
     }
 
-    public void deleteProduct(String id) {
+        public void deleteProduct(UUID id) {
         try {
             productRepository.deleteById(id);
         } catch (Exception e) {

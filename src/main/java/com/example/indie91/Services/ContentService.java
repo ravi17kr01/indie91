@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ContentService {
@@ -18,7 +19,7 @@ public class ContentService {
         return contentRepository.findAll();
     }
 
-    public Optional<Content> getContentById(String id) {
+    public Optional<Content> getContentById(UUID id) {
         return contentRepository.findById(id);
     }
 
@@ -26,7 +27,7 @@ public class ContentService {
         return contentRepository.save(content);
     }
 
-    public void deleteContent(String id) {
+    public void deleteContent(UUID id) {
         contentRepository.deleteById(id);
     }
 }

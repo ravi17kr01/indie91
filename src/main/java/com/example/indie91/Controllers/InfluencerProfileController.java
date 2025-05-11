@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/influencer-profile")
@@ -40,7 +41,7 @@ public class InfluencerProfileController {
 
     // Get influencer profile by ID
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<InfluencerProfile>> getProfileById(@PathVariable String id) {
+    public ResponseEntity<ApiResponse<InfluencerProfile>> getProfileById(@PathVariable UUID id) {
         try {
             Optional<InfluencerProfile> profile = influencerProfileService.getProfileById(id);
             return profile.map(value -> ResponseUtils.success(value, "Influencer profile found"))
@@ -65,7 +66,7 @@ public class InfluencerProfileController {
 
     // Delete influencer profile by ID
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse<String>> deleteProfile(@PathVariable String id) {
+    public ResponseEntity<ApiResponse<String>> deleteProfile(@PathVariable UUID id) {
         try {
             influencerProfileService.deleteProfile(id);
             return ResponseUtils.success("Influencer profile deleted successfully", "Deleted");

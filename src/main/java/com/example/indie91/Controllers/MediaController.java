@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * REST controller for managing ProductMedia entities.
@@ -36,7 +37,7 @@ public class MediaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<Media>> getMediaById(@PathVariable String id) {
+    public ResponseEntity<ApiResponse<Media>> getMediaById(@PathVariable UUID id) {
         try {
             Optional<Media> media = productMediaService.getMediaById(id);
             return media.map(value -> ResponseUtils.success(value, "Media found"))
@@ -57,7 +58,7 @@ public class MediaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse<String>> deleteMedia(@PathVariable String id) {
+    public ResponseEntity<ApiResponse<String>> deleteMedia(@PathVariable UUID id) {
         try {
             productMediaService.deleteMedia(id);
             return ResponseUtils.success("Media deleted successfully", "Deleted");

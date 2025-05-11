@@ -1,13 +1,12 @@
 package com.example.indie91.Repositories;
 
 import com.example.indie91.Models.Media;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-/**
- * Repository for ProductMedia entity.
- */
-@Repository
-public interface MediaRepository extends MongoRepository<Media, String> {
-    // Additional queries if needed
+import java.util.UUID;
+
+public interface MediaRepository extends JpaRepository<Media, UUID> {
+    // Example query
+    Media findByUrl(String url);
 }

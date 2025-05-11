@@ -1,13 +1,15 @@
 package com.example.indie91.Repositories;
 
 import com.example.indie91.Models.ContentProduct;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
-@Repository
-public interface ContentProductRepository extends MongoRepository<ContentProduct, String> {
-    List<ContentProduct> findByContentId(String contentId);
-    List<ContentProduct> findByProductId(String productId);
+public interface ContentProductRepository extends JpaRepository<ContentProduct, UUID> {
+
+    List<ContentProduct> findByContentId(UUID contentId);
+
+    List<ContentProduct> findByProductId(UUID productId);
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ProductMediaService {
@@ -27,7 +28,7 @@ public class ProductMediaService {
         }
     }
 
-    public Optional<ProductMedia> getById(String id) {
+    public Optional<ProductMedia> getById(Long id) {
         try {
             return productMediaRepository.findById(id);
         } catch (Exception e) {
@@ -45,7 +46,7 @@ public class ProductMediaService {
         }
     }
 
-    public void delete(String id) {
+    public void delete(Long id) {
         try {
             productMediaRepository.deleteById(id);
         } catch (Exception e) {
@@ -54,7 +55,7 @@ public class ProductMediaService {
         }
     }
 
-    public List<ProductMedia> getByProductId(String productId) {
+    public List<ProductMedia> getByProductId(UUID productId) {
         try {
             return productMediaRepository.findByProductId(productId);
         } catch (Exception e) {
@@ -63,7 +64,7 @@ public class ProductMediaService {
         }
     }
 
-    public List<ProductMedia> getByMediaId(String mediaId) {
+    public Optional<ProductMedia> getByMediaId(UUID mediaId) {
         try {
             return productMediaRepository.findByMediaId(mediaId);
         } catch (Exception e) {

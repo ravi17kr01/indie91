@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Service layer for handling product media business logic.
@@ -30,7 +31,7 @@ public class MediaService {
         }
     }
 
-    public Optional<Media> getMediaById(String id) {
+    public Optional<Media> getMediaById(UUID id) {
         try {
             return productMediaRepository.findById(id);
         } catch (Exception e) {
@@ -48,7 +49,7 @@ public class MediaService {
         }
     }
 
-    public void deleteMedia(String id) {
+    public void deleteMedia(UUID id) {
         try {
             productMediaRepository.deleteById(id);
         } catch (Exception e) {

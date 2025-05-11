@@ -1,36 +1,46 @@
 package com.example.indie91.Models;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
-@Document(collection = "user")
+@Entity
+@Table(name = "app_user")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
 
     @Id
-    private String id;
+    @GeneratedValue
+    @Column(columnDefinition = "uuid", updatable = false, nullable = false)
+    private UUID id;
 
-    @NotBlank
     private String name;
+
     private String phone;
 
-    @Email
     private String email;
+
+    @Column(name = "firebase_uid")
     private String firebaseUid;
 
+    @Column(name = "is_staff")
     private boolean isStaff;
+
+    @Column(name = "is_superuser")
     private boolean isSuperuser;
+
+    @Column(name = "is_active")
     private boolean isActive;
 
+    @Column(name = "joined_on")
     private LocalDateTime joinedOn;
+
+    @Column(name = "avatar_url")
     private String avatarUrl;
 }

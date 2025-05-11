@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * BrandController handles HTTP requests for managing brands. It communicates with the
@@ -48,7 +49,7 @@ public class BrandController {
      * @return A ResponseEntity containing the brand or an error message.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<Brand>> getBrandById(@PathVariable String id) {
+    public ResponseEntity<ApiResponse<Brand>> getBrandById(@PathVariable UUID id) {
         try {
             Optional<Brand> brand = brandService.getBrandById(id);
             return brand.map(value -> ResponseUtils.success(value, "Brand found"))
@@ -81,7 +82,7 @@ public class BrandController {
      * @return A ResponseEntity containing a success message.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse<String>> deleteBrand(@PathVariable String id) {
+    public ResponseEntity<ApiResponse<String>> deleteBrand(@PathVariable UUID id) {
         try {
             brandService.deleteBrand(id);
             return ResponseUtils.success("Brand deleted successfully", "Deleted");

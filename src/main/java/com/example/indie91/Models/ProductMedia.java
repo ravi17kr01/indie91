@@ -1,20 +1,26 @@
 package com.example.indie91.Models;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "product_media")
+import java.util.UUID;
+
+@Entity
+@Table(name = "product_product_media")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductMedia {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id; // This is fine as `int8` maps to `Long`
 
-    private String productId;
-    private String mediaId;
+    @Column(name = "product_id", columnDefinition = "uuid")
+    private UUID productId;
+
+    @Column(name = "product_media_id", columnDefinition = "uuid")
+    private UUID mediaId;
 }

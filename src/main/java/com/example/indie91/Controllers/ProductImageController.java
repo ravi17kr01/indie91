@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/productImage")
@@ -33,7 +34,7 @@ public class ProductImageController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<ProductImage>> getImageById(@PathVariable String id) {
+    public ResponseEntity<ApiResponse<ProductImage>> getImageById(@PathVariable UUID id) {
         try {
             Optional<ProductImage> image = productImageService.getImageById(id);
             return image.map(value -> ResponseUtils.success(value, "Image found"))
@@ -44,7 +45,7 @@ public class ProductImageController {
     }
 
     @GetMapping("/byProduct/{productId}")
-    public ResponseEntity<ApiResponse<List<ProductImage>>> getImagesByProductId(@PathVariable String productId) {
+    public ResponseEntity<ApiResponse<List<ProductImage>>> getImagesByProductId(@PathVariable UUID productId) {
         try {
             List<ProductImage> images = productImageService.getImagesByProductId(productId);
             if (images.isEmpty()) {
@@ -67,7 +68,7 @@ public class ProductImageController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse<String>> deleteImage(@PathVariable String id) {
+    public ResponseEntity<ApiResponse<String>> deleteImage(@PathVariable UUID id) {
         try {
             productImageService.deleteImage(id);
             return ResponseUtils.success("Image deleted successfully", "Deleted");

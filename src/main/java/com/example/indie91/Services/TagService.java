@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * TagService class contains the business logic for managing tags. It interacts
@@ -42,7 +43,7 @@ public class TagService {
      * @param id The ID of the tag to retrieve.
      * @return An Optional containing the tag if found, else an empty Optional.
      */
-    public Optional<Tag> getTagById(String id) {
+    public Optional<Tag> getTagById(UUID id) {
         try {
             return tagRepository.findById(id);
         } catch (Exception e) {
@@ -71,7 +72,7 @@ public class TagService {
      *
      * @param id The ID of the tag to delete.
      */
-    public void deleteTag(String id) {
+    public void deleteTag(UUID id) {
         try {
             tagRepository.deleteById(id);
         } catch (Exception e) {

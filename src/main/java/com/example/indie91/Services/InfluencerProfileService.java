@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class InfluencerProfileService {
@@ -29,7 +30,7 @@ public class InfluencerProfileService {
     }
 
     // Get influencer profile by ID
-    public Optional<InfluencerProfile> getProfileById(String id) {
+    public Optional<InfluencerProfile> getProfileById(UUID id) {
         try {
             return influencerProfileRepository.findById(id);
         } catch (Exception e) {
@@ -49,7 +50,7 @@ public class InfluencerProfileService {
     }
 
     // Delete influencer profile by ID
-    public void deleteProfile(String id) {
+    public void deleteProfile(UUID id) {
         try {
             influencerProfileRepository.deleteById(id);
         } catch (Exception e) {

@@ -1,19 +1,23 @@
 package com.example.indie91.Models;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "media")
+import java.util.UUID;
+
+@Entity
+@Table(name = "product_media")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Media {
 
     @Id
-    private String id;
+    @GeneratedValue
+    @Column(columnDefinition = "uuid", updatable = false, nullable = false)
+    private UUID id;
 
     private String url;
 }

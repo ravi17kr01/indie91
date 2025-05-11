@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/user")
@@ -40,7 +41,7 @@ public class UserController {
 
     // Get user by ID
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<User>> getUserById(@PathVariable String id) {
+    public ResponseEntity<ApiResponse<User>> getUserById(@PathVariable UUID id) {
         try {
             Optional<User> user = userService.getUserById(id);
             return user.map(value -> ResponseUtils.success(value, "User found"))
@@ -65,7 +66,7 @@ public class UserController {
 
     // Delete user by ID
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse<String>> deleteUser(@PathVariable String id) {
+    public ResponseEntity<ApiResponse<String>> deleteUser(@PathVariable UUID id) {
         try {
             Optional<User> user = userService.getUserById(id);
             if (user.isEmpty()) {
