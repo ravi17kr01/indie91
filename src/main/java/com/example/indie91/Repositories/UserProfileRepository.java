@@ -49,6 +49,7 @@ public interface UserProfileRepository extends CrudRepository<User, UUID> {
                                     'price', p.price,
                                     'brandId', b.id,
                                     'brandName', b.name,
+                                    'brandLogo', b.logo_url,
                                     'productImages', (
                                         SELECT jsonb_agg(
                                             jsonb_build_object(
@@ -123,6 +124,7 @@ public interface UserProfileRepository extends CrudRepository<User, UUID> {
                                     'price', p.price,
                                     'brandId', b.id,
                                     'brandName', b.name,
+                                    'brandLogo', b.logo_url,
                                     'productImages', (
                                         SELECT jsonb_agg(
                                             jsonb_build_object(
