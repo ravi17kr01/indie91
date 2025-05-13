@@ -26,15 +26,15 @@ public class PaymentController {
         System.out.println("Payment Started!!!");
 
         return new RedirectView(paymentService.initiatePayment(payment).toString());
-//        return paymentService.initiatePayment(payment).toString();
+//       return paymentService.initiatePayment(payment).toString();
 
     }
 
     @PostMapping("/callback-url")
     public String paymentStatus(@RequestParam(required = false) String code, @RequestParam(required = false) String transactionId, @RequestParam(required = false) String merchantId){
-        System.out.println("code" + code);
-        System.out.println("transactionId" + transactionId);
-        System.out.println("merchantId" + merchantId);
+        System.out.println("code: " + code);
+        System.out.println("transactionId: " + transactionId);
+        System.out.println("merchantId: " + merchantId);
 
         return paymentService.getStatus(code, transactionId, merchantId);
     }

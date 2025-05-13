@@ -30,8 +30,8 @@ public class PaymentService {
                     .merchantUserId(payment.getUserName())
                     .merchantId("PGTESTPAYUAT86")
                     .merchantTransactionId(payment.getTransactionId().toString())
-                    .callbackUrl("https://indie91.onrender.com/api/payment/callback-url")
-                    .redirectUrl("https://indie91.onrender.com/api/payment/callback-url")
+                    .callbackUrl("http://localhost:8080/api/payment/callback-url")
+                    .redirectUrl("http://localhost:8080/api/payment/callback-url")
                     .redirectMode("POST")
                     .build();
 

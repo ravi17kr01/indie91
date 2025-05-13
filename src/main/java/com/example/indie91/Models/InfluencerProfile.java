@@ -55,7 +55,7 @@ public class InfluencerProfile {
     private LocalDateTime updatedAt;
 
     // Choose one of these based on actual usage:
-    @Column(name = "userid")
+    @Column(name = "user_id")
     private UUID userId;
 
     // If you actually use user_id (varchar), then:
