@@ -1,6 +1,7 @@
 package com.example.indie91.Controllers;
 
 import com.example.indie91.Models.Content;
+import com.example.indie91.Models.Product;
 import com.example.indie91.POJO.ApiResponse;
 import com.example.indie91.Services.ContentService;
 import com.example.indie91.Utils.ResponseUtils;
@@ -67,6 +68,19 @@ public class ContentController {
         }
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponse<Content>> updateContent(@PathVariable UUID id, @RequestBody Content partialContent) {
+        try {
+            Content updatedContent = contentService.updateContent(id, partialContent);
+            return ResponseUtils.success(updatedContent, "Content updated successfully");
+        } catch (RuntimeException e) {
+            if (e.getMessage().contains("not found")) {
+                return ResponseUtils.error(HttpStatus.NOT_FOUND, e.getMessage());
+            }
+            return ResponseUtils.error(HttpStatus.INTERNAL_SERVER_ERROR, "Error updating content");
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Void>> deleteContent(@PathVariable UUID id) {
         try {
@@ -75,6 +89,16 @@ public class ContentController {
         } catch (Exception e) {
             logger.error("Error deleting content", e);
             return ResponseUtils.error(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to delete content.");
+        }
+    }
+
+    @GetMapping("/{id}/like")
+    public ResponseEntity<ApiResponse<Content>> likeContent(@PathVariable UUID id) {
+        try {
+            Content updatedContent = contentService.incrementLikeCount(id);
+            return ResponseUtils.success(updatedContent, "Like added to content");
+        } catch (RuntimeException e) {
+            return ResponseUtils.error(HttpStatus.NOT_FOUND, "Content not found");
         }
     }
 }

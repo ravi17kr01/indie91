@@ -33,8 +33,9 @@ public interface UserProfileRepository extends CrudRepository<User, UUID> {
                         'contentId', c.id,
                         'contentType', c.content_type,
                         'contentUrl', c.url,
-                        'viewsCount', c.views_count,
-                        'likesCount', c.likes_count,
+                        'contentViewsCount', c.views_count,
+                        'contentLikesCount', c.likes_count,
+                        'contentShareCount', c.share_count,
                         'contentDescription', c.description,
                         'tag', jsonb_build_object(
                             'tagId', t.id,
@@ -45,11 +46,17 @@ public interface UserProfileRepository extends CrudRepository<User, UUID> {
                                 jsonb_build_object(
                                     'productId', p.product_id,
                                     'productName', p.name,
+                                    'productViewsCount', p.view_count,
+                                    'productLikesCount', p.like_count,
+                                    'productShareCount', p.share_count,
                                     'caption', p.caption,
                                     'price', p.price,
                                     'brandId', b.id,
                                     'brandName', b.name,
                                     'brandLogo', b.logo_url,
+                                    'brandViewsCount', b.view_count,
+                                    'brandLikesCount', b.like_count,
+                                    'brandShareCount', b.share_count,
                                     'productImages', (
                                         SELECT jsonb_agg(
                                             jsonb_build_object(
@@ -108,8 +115,9 @@ public interface UserProfileRepository extends CrudRepository<User, UUID> {
                         'contentId', c.id,
                         'contentType', c.content_type,
                         'contentUrl', c.url,
-                        'viewsCount', c.views_count,
-                        'likesCount', c.likes_count,
+                        'contentViewsCount', c.views_count,
+                        'contentLikesCount', c.likes_count,
+                        'contentShareCount', c.share_count,
                         'contentDescription', c.description,
                         'tag', jsonb_build_object(
                             'tagId', t.id,
@@ -120,11 +128,17 @@ public interface UserProfileRepository extends CrudRepository<User, UUID> {
                                 jsonb_build_object(
                                     'productId', p.product_id,
                                     'productName', p.name,
+                                    'productViewsCount', p.view_count,
+                                    'productLikesCount', p.like_count,
+                                    'productShareCount', p.share_count,
                                     'caption', p.caption,
                                     'price', p.price,
                                     'brandId', b.id,
                                     'brandName', b.name,
                                     'brandLogo', b.logo_url,
+                                    'brandViewsCount', b.view_count,
+                                    'brandLikesCount', b.like_count,
+                                    'brandShareCount', b.share_count,
                                     'productImages', (
                                         SELECT jsonb_agg(
                                             jsonb_build_object(

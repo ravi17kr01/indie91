@@ -64,7 +64,7 @@ public class ContentProductService {
         }
     }
 
-    public List<ContentProduct> getByProductId(UUID productId) {
+    public List<String> getByProductId(UUID productId) {
         try {
             return contentProductRepository.findByProductId(productId);
         } catch (Exception e) {

@@ -1,5 +1,6 @@
 package com.example.indie91.Controllers;
 
+import com.example.indie91.Models.Brand;
 import com.example.indie91.Models.Product;
 import com.example.indie91.POJO.ApiResponse;
 import com.example.indie91.Services.ProductService;
@@ -57,6 +58,19 @@ public class ProductController {
         }
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponse<Product>> updateProduct(@PathVariable UUID id, @RequestBody Product partialProduct) {
+        try {
+            Product updatedProduct = productService.updateProduct(id, partialProduct);
+            return ResponseUtils.success(updatedProduct, "Product updated successfully");
+        } catch (RuntimeException e) {
+            if (e.getMessage().contains("not found")) {
+                return ResponseUtils.error(HttpStatus.NOT_FOUND, e.getMessage());
+            }
+            return ResponseUtils.error(HttpStatus.INTERNAL_SERVER_ERROR, "Error updating product");
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<String>> deleteProduct(@PathVariable UUID id) {
         try {
@@ -64,6 +78,16 @@ public class ProductController {
             return ResponseUtils.success("Product deleted successfully", "Deleted");
         } catch (Exception e) {
             return ResponseUtils.error(HttpStatus.INTERNAL_SERVER_ERROR, "Error deleting product");
+        }
+    }
+
+    @GetMapping("/{id}/like")
+    public ResponseEntity<ApiResponse<Product>> likeProduct(@PathVariable UUID id) {
+        try {
+            Product updatedProduct = productService.incrementLikeCount(id);
+            return ResponseUtils.success(updatedProduct, "Like added to product");
+        } catch (RuntimeException e) {
+            return ResponseUtils.error(HttpStatus.NOT_FOUND, "Product not found");
         }
     }
 }

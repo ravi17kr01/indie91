@@ -1,5 +1,6 @@
 package com.example.indie91.Services;
 
+import com.example.indie91.Models.Brand;
 import com.example.indie91.Models.Product;
 import com.example.indie91.Repositories.ProductRepository;
 import org.slf4j.Logger;
@@ -49,7 +50,45 @@ public class ProductService {
         }
     }
 
-        public void deleteProduct(UUID id) {
+    /**
+     * Updates an existing product with new data (supports partial updates).
+     *
+     * @param id           The ID of the brand to update.
+     * @param updatedProduct The partial brand object containing updated fields.
+     * @return The updated brand.
+     */
+    public Product updateProduct(UUID id, Product updatedProduct) {
+        try {
+            Optional<Product> existingProductOpt = productRepository.findById(id);
+            if (existingProductOpt.isEmpty()) {
+                throw new RuntimeException("Product not found");
+            }
+
+            Product existingProduct = existingProductOpt.get();
+
+            // Merge updated fields (only if non-null)
+            if (updatedProduct.getName() != null) {
+                existingProduct.setName(updatedProduct.getName());
+            }
+
+            if(updatedProduct.getLikeCount() != null){
+                existingProduct.setLikeCount(updatedProduct.getLikeCount());
+            }
+
+            if(updatedProduct.getShareCount() != null){
+                existingProduct.setShareCount(updatedProduct.getShareCount());
+            }
+
+            // Add more field checks as needed
+            return productRepository.save(existingProduct);
+        } catch (Exception e) {
+            logger.error("Error updating brand with ID: {}", id, e);
+            throw new RuntimeException("Error updating brand", e);
+        }
+    }
+
+
+    public void deleteProduct(UUID id) {
         try {
             productRepository.deleteById(id);
         } catch (Exception e) {
@@ -57,4 +96,14 @@ public class ProductService {
             throw new RuntimeException("Error deleting product", e);
         }
     }
+
+    public Product incrementLikeCount(UUID id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        int currentLikes = product.getLikeCount() != null ? product.getLikeCount() : 0;
+        product.setLikeCount(currentLikes + 1);
+        return productRepository.save(product);
+    }
+
 }

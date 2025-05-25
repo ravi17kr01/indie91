@@ -31,6 +31,15 @@ public class Brand {
     @Column(name = "logo_url")
     private String logoUrl;
 
+    @Column(name = "view_count")
+    private Integer viewCount;
+
+    @Column(name = "like_count")
+    private Integer likeCount;
+
+    @Column(name = "share_count")
+    private Integer shareCount;
+
     @Column(name = "brand_slug")
     private String brandSlug;
 

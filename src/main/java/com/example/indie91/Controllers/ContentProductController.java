@@ -72,9 +72,9 @@ public class ContentProductController {
     }
 
     @GetMapping("/byProduct/{productId}")
-    public ResponseEntity<ApiResponse<List<ContentProduct>>> getByProductId(@PathVariable UUID productId) {
+    public ResponseEntity<ApiResponse<List<String>>> getByProductId(@PathVariable UUID productId) {
         try {
-            List<ContentProduct> list = service.getByProductId(productId);
+            List<String> list = service.getByProductId(productId);
             return ResponseUtils.success(list, "Fetched by product ID");
         } catch (Exception e) {
             return ResponseUtils.error(HttpStatus.INTERNAL_SERVER_ERROR, "Error fetching by product ID");

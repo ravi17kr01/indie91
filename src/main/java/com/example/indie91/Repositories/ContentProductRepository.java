@@ -2,6 +2,8 @@ package com.example.indie91.Repositories;
 
 import com.example.indie91.Models.ContentProduct;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,5 +13,11 @@ public interface ContentProductRepository extends JpaRepository<ContentProduct, 
 
     List<ContentProduct> findByContentId(UUID contentId);
 
-    List<ContentProduct> findByProductId(UUID productId);
+    @Query(value = """
+            select distinct c.url from content_products as cp
+                        left join content as c
+                        on cp.content_id = c.id
+                        where cp.product_id = :productId
+            """, nativeQuery = true)
+    List<String> findByProductId(@Param("productId") UUID productId);
 }

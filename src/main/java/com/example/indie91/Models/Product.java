@@ -24,6 +24,15 @@ public class Product {
 
     private String caption;
 
+    @Column(name = "view_count")
+    private Integer viewCount;
+
+    @Column(name = "like_count")
+    private Integer likeCount;
+
+    @Column(name = "share_count")
+    private Integer shareCount;
+
     @Column(name = "is_active")
     private Boolean isActive;
 

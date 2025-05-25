@@ -14,7 +14,7 @@ public class PingController {
         return "Server is up and working well!!!";
     }
 
-    @GetMapping("/api")
+    @GetMapping("/apis")
     public void redirect(HttpServletResponse response) throws IOException {
         response.sendRedirect("/swagger-ui.html");
     }

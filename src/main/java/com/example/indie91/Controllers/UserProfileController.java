@@ -1,15 +1,13 @@
 package com.example.indie91.Controllers;
 
 import com.example.indie91.DTO.UserFullProfileDTO;
+import com.example.indie91.Exceptions.NoUsersFoundException;
 import com.example.indie91.Services.UserProfileService;
 import com.example.indie91.Utils.ResponseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -33,8 +31,7 @@ public class UserProfileController {
             return ResponseEntity.ok(json);
         }catch (Exception e){
             System.out.println("Error while fetching user profiles ----> " + e);
-//            return ResponseUtils.error(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to fetch user profile");
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"error\": \"Failed to fetch user profile\"}");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong: " + e.getMessage());
         }
     }
 }

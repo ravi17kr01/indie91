@@ -68,6 +68,49 @@ public class BrandService {
     }
 
     /**
+     * Updates an existing brand with new data (supports partial updates).
+     *
+     * @param id           The ID of the brand to update.
+     * @param updatedBrand The partial brand object containing updated fields.
+     * @return The updated brand.
+     */
+    public Brand updateBrand(UUID id, Brand updatedBrand) {
+        try {
+            Optional<Brand> existingBrandOpt = brandRepository.findById(id);
+            if (existingBrandOpt.isEmpty()) {
+                throw new RuntimeException("Brand not found");
+            }
+
+            Brand existingBrand = existingBrandOpt.get();
+
+            // Merge updated fields (only if non-null)
+            if (updatedBrand.getName() != null) {
+                existingBrand.setName(updatedBrand.getName());
+            }
+
+            if (updatedBrand.getDescription() != null) {
+                existingBrand.setDescription(updatedBrand.getDescription());
+            }
+
+            if (updatedBrand.getLikeCount() != null) {
+                int currentCount = existingBrand.getLikeCount() != null ? existingBrand.getLikeCount() : 0;
+                existingBrand.setLikeCount(currentCount + updatedBrand.getLikeCount());
+            }
+
+            if(updatedBrand.getShareCount() != null){
+                existingBrand.setShareCount(updatedBrand.getShareCount());
+            }
+
+            // Add more field checks as needed
+
+            return brandRepository.save(existingBrand);
+        } catch (Exception e) {
+            logger.error("Error updating brand with ID: {}", id, e);
+            throw new RuntimeException("Error updating brand", e);
+        }
+    }
+
+    /**
      * Deletes a brand by its ID.
      *
      * @param id The ID of the brand to delete.
@@ -79,5 +122,14 @@ public class BrandService {
             logger.error("Error deleting brand with ID: {}", id, e);
             throw new RuntimeException("Error deleting brand", e);
         }
+    }
+
+    public Brand incrementLikeCount(UUID id) {
+        Brand brand = brandRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Brand not found"));
+
+        int currentCount = brand.getLikeCount() != null ? brand.getLikeCount() : 0;
+        brand.setLikeCount(currentCount + 1);
+        return brandRepository.save(brand);
     }
 }

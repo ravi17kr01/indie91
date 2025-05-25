@@ -75,6 +75,19 @@ public class BrandController {
         }
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponse<Brand>> updateBrand(@PathVariable UUID id, @RequestBody Brand partialBrand) {
+        try {
+            Brand updatedBrand = brandService.updateBrand(id, partialBrand);
+            return ResponseUtils.success(updatedBrand, "Brand updated successfully");
+        } catch (RuntimeException e) {
+            if (e.getMessage().contains("not found")) {
+                return ResponseUtils.error(HttpStatus.NOT_FOUND, e.getMessage());
+            }
+            return ResponseUtils.error(HttpStatus.INTERNAL_SERVER_ERROR, "Error updating brand");
+        }
+    }
+
     /**
      * Endpoint to delete a brand by its ID.
      *
@@ -88,6 +101,16 @@ public class BrandController {
             return ResponseUtils.success("Brand deleted successfully", "Deleted");
         } catch (Exception e) {
             return ResponseUtils.error(HttpStatus.INTERNAL_SERVER_ERROR, "Error deleting brand");
+        }
+    }
+
+    @GetMapping("/{id}/like")
+    public ResponseEntity<ApiResponse<Brand>> likeBrand(@PathVariable UUID id) {
+        try {
+            Brand updated = brandService.incrementLikeCount(id);
+            return ResponseUtils.success(updated, "Like added");
+        } catch (RuntimeException e) {
+            return ResponseUtils.error(HttpStatus.NOT_FOUND, "Brand not found");
         }
     }
 }
