@@ -33,8 +33,8 @@ public class InfluencerProfile {
     @Column(name = "total_sales")
     private Integer totalSales;
 
-    @Column(name = "followers_count")
-    private Integer followersCount;
+    @Column(name = "like_count")
+    private Integer likeCount;
 
     @Column(name = "engagement_rate")
     private Double engagementRate;

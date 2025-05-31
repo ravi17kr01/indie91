@@ -24,7 +24,7 @@ public interface UserProfileRepository extends CrudRepository<User, UUID> {
             ip.total_earnings AS totalearnings,
             ip.current_earnings AS currentearnings,
             ip.total_sales AS totalsales,
-            ip.followers_count AS followerscount,
+            ip.like_count AS likeCount,
             ip.engagement_rate AS engagementrate,
             ip.brand_collaborations AS brandcollaborations,
             (
@@ -106,7 +106,7 @@ public interface UserProfileRepository extends CrudRepository<User, UUID> {
             ip.total_earnings AS totalearnings,
             ip.current_earnings AS currentearnings,
             ip.total_sales AS totalsales,
-            ip.followers_count AS followerscount,
+            ip.like_count AS likeCount,
             ip.engagement_rate AS engagementrate,
             ip.brand_collaborations AS brandcollaborations,
             (
