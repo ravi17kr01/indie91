@@ -14,7 +14,7 @@ func main() {
 
 	// Apply CORS middleware globally
 	app.Use(cors.New(cors.Config{
-		AllowOrigins:     "https://indie91.vercel.app",
+		AllowOrigins:     "https://indie91.vercel.app, http://localhost:3000",
 		AllowHeaders:     "Origin, Content-Type, Accept, Authorization",
 		AllowMethods:     "GET, POST, PUT, DELETE, OPTIONS",
 		ExposeHeaders:    "Content-Length",
